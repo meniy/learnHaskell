@@ -39,9 +39,9 @@ Done:
 
 Todo:
 - [] Higher Order Functions
-  - [] Curried functions
-  - [] Some higher-orderism is in order
-  - [] Maps and filters
+  - [x] Curried functions
+  - [x] Some higher-orderism is in order
+  - [x] Maps and filters
   - [] Lambdas
   - [] Only folds and horses
   - [] Function application with $

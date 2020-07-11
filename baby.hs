@@ -241,7 +241,7 @@ recuReplicate n x
 
 -- take with recursion
 recuTake ::(Num i, Ord i) => i-> [a] -> [a]
-recuTake n x
+recuTake n x  -- 2 [5,4,3,2] => [5,4]
   | n <= 0 = []
 recuTake _ [] = [] -- indipendetemente da n se il vettore vuoto ritorna vuoto
 recuTake n (x:xs) = x : recuTake (n-1) xs
@@ -256,3 +256,113 @@ recZip' :: [a] -> [b] -> [(a,b)]
 recZip' _ [] = []
 recZip' [] _ = []
 recZip' (x:xs) (y:ys) = (x,y):recZip' xs ys
+
+
+-- HOF
+-- Curried Functions
+--  All the functions that accepted several parameters so far have been curried functions
+-- max :: (Ord a) => a -> a -> a.
+-- That can also be written as
+-- max :: (Ord a) => a -> (a -> a)
+-- That could be read as:
+-- max takes an a and returns (that's the ->) a function that takes an a and returns an a.
+-- That's why the return type and the parameters of functions are all simply separated with arrows.
+
+
+-- multThree :: (Num a) => a -> a -> a -> a
+-- multThree x y z = x * y * z
+
+-- What really happens when we do multThree 3 5 9 or ((multThree 3) 5) 9?
+-- First, 3 is applied to multThree, because they're separated by a space.
+-- That creates a function that takes one parameter and returns a function.
+-- So then 5 is applied to that, which creates a function that will take a parameter and multiply it by 15.
+-- 9 is applied to that function and the result is 135 or something.
+-- Remember that this function's type could also be written as
+-- multThree :: (Num a) => a -> (a -> (a -> a)).
+-- The thing before the -> is the parameter that a function takes and the thing after it is what it returns.
+-- So our function takes an a and returns a function of type
+-- (Num a) => a -> (a -> a).
+-- Similarly, this function takes an a and returns a function of type
+-- (Num a) => a -> a.
+-- And this function, finally, just takes an a and returns an a.
+
+
+-- compareWithHundred :: (Num a, Ord a) => a -> Ordering
+-- compareWithHundred x = compare 100 x
+-- equivalent to
+compareWithHundred :: (Num a, Ord a) => a -> Ordering
+compareWithHundred = compare 100
+
+-- surround with parentheses
+-- That creates a function that takes one parameter and
+-- then applies it to the side that's missing an operand
+divideByTen :: (Floating a) => a -> a
+divideByTen = (/10)   -- divideByTen 200 =>20 or divideByTen 50=>5
+
+isUpperAlphanum :: Char -> Bool
+isUpperAlphanum = (`elem` ['A'..'Z'])
+
+-- Warning
+-- divideByTen :: (Floating a) => a -> a
+-- divideByTen = (-4) -- minus four!!
+
+subByFour :: (Floating a) => a -> a
+subByFour = (subtract 4)
+
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+
+-- map
+--takes a function and a list and applies that function to every element in the list, producing a new list.
+map' :: (a -> b) -> [a] -> [b]
+map' _ [] = []
+map' f (x:xs) = f x : map' f xs
+
+-- -- filter
+-- filter' :: (a-> Bool) -> [a] -> [a]
+-- filter' _,[]=[]
+-- filter' p (x:xs)
+--   | p x       = x : filter' p xs -- if p x is True elements gets included in the new list, otherwise not
+--   | otherwise = filter p xs
+
+-- quicksort with filters
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) =
+    let smallerSorted = quicksort (filter (<=x) xs)
+        biggerSorted = quicksort (filter (>x) xs)
+    in  smallerSorted ++ [x] ++ biggerSorted
+
+--takeWhile
+-- It takes a predicate and a list and then goes from the beginning of the list and returns its elements while the predicate holds true
+--Once an element is found for which the predicate doesn't hold, it stops.
+-- we wanted to get the first word of the string
+-- Next up, we're going to find the sum of all odd squares that are smaller than 10,000. But first, because we'll be using it in our solution, we're going to introduce the takeWhile function. It takes a predicate and a list and then goes from the beginning of the list and returns its elements while the predicate holds true. Once an element is found for which the predicate doesn't hold, it stops.
+-- If we wanted to get the first word of the string "elephants know how to party", we could do
+-- takeWhile (/=' ')
+-- sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
+
+
+--For our next problem, we'll be dealing with Collatz sequences.
+-- We take a natural number. If that number is even, we divide it by two. If it's odd, we multiply it by 3 and then add 1 to that
+-- We take the resulting number and apply the same thing to it, which produces a new number and so on
+-- 13, we get this sequence: 13, 40, 20, 10, 5, 16, 8, 4, 2, 1
+-- 13*3+1=40, 40/2=20,20/2=10,10/2=5,5*3+1=16,16/2=8,8/2=4,4/2=2,2/2=1
+
+chain :: (Integral a) => a -> [a]
+chain 1 = [1]
+chain n
+    | even n =  n:chain (n `div` 2)
+    | odd n  =  n:chain (n*3 + 1)
+
+-- Now what we want to know is this:
+-- for all starting numbers between 1 and 100, how many chains have a length greater than 15?
+-- sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
+numLongChains :: Int
+numLongChains = length (filter isLong ( map chain [1..100]))
+  where isLong xs = length xs >15
