@@ -366,3 +366,73 @@ chain n
 numLongChains :: Int
 numLongChains = length (filter isLong ( map chain [1..100]))
   where isLong xs = length xs >15
+-- lambda -> anonymouse functions used only Once,
+-- to make a lambda we write \
+-- like `where`
+numLongChains :: Int
+numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
+-- map (+3) [1,6,3,2]
+-- map (\x -> x + 3) [1,6,3,2]
+-- are equivalent
+map (\(a,b) -> a + b) [(1,2),(3,5),(6,3),(2,6),(2,5)]
+
+-- foldl
+-- called the left foldl
+sum' :: (Num a )=>[a] -> a
+sum' xs = foldl (\acc x -> acc + x) 0 xs
+-- sum' [3,5,2,1]
+-- 11
+-- foldr, similar way to the left fold,
+
+
+map' :: (a -> b) -> [a] -> [b]
+map' f xs = foldr (\x acc -> f x : acc) [] xs
+-- (+3) [1,2,3] => 3 + 3 =6 => x:acc=> []. 6:[] is [6]
+-- this function with a left fold too. It would be
+-- map' f xs = foldl (\acc x -> acc ++ [f x]) [] xs,
+-- but the thing is that the ++ function is much more expensive than :, so we usually use right folds when we're building up new lists from a list.
+
+
+-- foldl1 and foldr1 work much like foldl and foldr, the assume the first (or last) element of the list to be the starting value
+-- scanl, scanr
+-- are like foldl and foldr, only they report all the intermediate accumulator states in the form of a list
+scanl (+) 0 [3,5,2,1] -- [0,3,8,10,11]
+scanr (+) 0 [3,5,2,1] -- [11,8,3,1,0]
+
+-- How many elements does it take for the sum of the roots of all natural numbers to exceed 1000?
+sqrtSums :: Int
+sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
+-- We use takeWhile here instead of filter because filter doesn't work on infinite lists. Even though we know the list is ascending, filter doesn't, so we use takeWhile to cut the scanlist off at the first occurence of a sum greater than 1000.
+
+-- Function application with $
+($) :: (a -> b) -> a -> b
+f $ x = f x
+
+-- sum (map sqrt [1..130])
+-- sum $ map sqrt [1..130]
+-- $ has a low precedence
+-- sqrt (3 + 4 + 9)
+-- sqrt $ 3 + 4 + 9
+-- $ means that function application can be treated just like another function.
+-- map function application over a list of functions.
+
+map ($ 3) [(4+), (10*), (^2), sqrt]
+-- [7.0,30.0,9.0,1.7320508075688772]
+
+
+-- Function composition
+-- in mathematics (f g)(x)=f(g(x))
+
+(.) :: (b->c)->(a->b)->a->c
+f . g = \x ->f (g x)
+
+-- One of the uses for function composition is making functions on the fly to pass to other functions
+map (\xs -> negate (sum (tail xs))) [[1..5],[3..6],[1..7]]
+[-14,-15,-27]
+
+-- into
+map (negate . sum . tail) [[1..5],[3..6],[1..7]]  -- boom
+
+-- replicate 100 (product (map (*3) (zipWith max [1,2,3,4,5] [4,5,6,7,8])))
+-- replicate 100 . product . map (*3) . zipWith max [1,2,3,4,5] $ [4,5,6,7,8]

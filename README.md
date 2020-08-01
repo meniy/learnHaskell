@@ -38,14 +38,14 @@ Done:
 
 
 Todo:
-- [] Higher Order Functions
+- [x] Higher Order Functions
   - [x] Curried functions
   - [x] Some higher-orderism is in order
   - [x] Maps and filters
-  - [] Lambdas
-  - [] Only folds and horses
-  - [] Function application with $
-  - [] Function composition
+  - [x] Lambdas
+  - [x] Only folds and horses
+  - [x] Function application with $
+  - [x] Function composition
 - [] Modules
   - [] Loading modules
   - [] Data.List
