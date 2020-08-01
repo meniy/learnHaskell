@@ -3,6 +3,7 @@
 platform: (https://www.haskell.org/platform/#linux-fedora)[haskell-platform-fedora]
 book: (http://learnyouahaskell.com/)[Learn You a Haskell]
 
+
 Done:
 - [x] Introduction
   - [x] About this tutorial
@@ -36,8 +37,6 @@ Done:
   - [x] Quick, sort!
   - [x] Thinking recursively
 
-
-Todo:
 - [x] Higher Order Functions
   - [x] Curried functions
   - [x] Some higher-orderism is in order
@@ -46,59 +45,64 @@ Todo:
   - [x] Only folds and horses
   - [x] Function application with $
   - [x] Function composition
-- [] Modules
-  - [] Loading modules
-  - [] Data.List
-  - [] Data.Char
-  - [] Data.Map
-  - [] Data.Set
-  - [] Making our own modules
-  - [] Making Our Own Types and Typeclasses
-  - [] Algebraic data types intro
-  - [] Record syntax
-  - [] Type parameters
-  - [] Derived instances
-  - [] Type synonyms
-  - [] Recursive data structures
-  - [] Typeclasses 102
-  - [] A yes-no typeclass
-  - [] The Functor typeclass
-  - [] Kinds and some type-foo
-- [] Input and Output
-  - [] Hello, world!
-  - [] Files and streams
-  - [] Command line arguments
-  - [] Randomness
-  - [] Bytestrings
-  - [] Exceptions
-- [] Functionally Solving Problems
-  - [] Reverse Polish notation calculator
-  - [] Heathrow to London
-- [] Functors, Applicative Functors and Monoids
-  - [] Functors redux
-  - [] Applicative functors
-  - [] The newtype keyword
-  - [] Monoids
-- [] A Fistful of Monads
-  - [] Getting our feet wet with Maybe
-  - [] The Monad type class
-  - [] Walk the line
-  - [] do notation
-  - [] The list monad
-  - [] Monad laws
-- [] For a Few Monads More
-  - [] Writer? I hardly know her!
-  - [] Reader? Ugh, not this joke again.
-  - [] Tasteful stateful computations
-  - [] Error error on the wall
-  - [] Some useful monadic functions
-  - [] Making monads
-- [] Zippers
-  - [] Taking a walk
-  - [] A trail of breadcrumbs
-  - [] Focusing on lists
-  - [] A very simple file system
-  - [] Watch your step
+
+In progress:
+- [ ] Modules
+  - [x] Loading modules
+  - [ ] Data.List
+  - [ ] Data.Char
+  - [ ] Data.Map
+  - [ ] Data.Set
+  - [ ] Making our own modules
+  - [ ] Making Our Own Types and Typeclasses
+  - [ ] Algebraic data types intro
+  - [ ] Record syntax
+  - [ ] Type parameters
+  - [ ] Derived instances
+  - [ ] Type synonyms
+  - [ ] Recursive data structures
+  - [ ] Typeclasses 102
+  - [ ] A yes-no typeclass
+  - [ ] The Functor typeclass
+  - [ ] Kinds and some type-foo
+
+Todo:
+
+- [ ] Input and Output
+  - [ ] Hello, world!
+  - [ ] Files and streams
+  - [ ] Command line arguments
+  - [ ] Randomness
+  - [ ] Bytestrings
+  - [ ] Exceptions
+- [ ] Functionally Solving Problems
+  - [ ] Reverse Polish notation calculator
+  - [ ] Heathrow to London
+- [ ] Functors, Applicative Functors and Monoids
+  - [ ] Functors redux
+  - [ ] Applicative functors
+  - [ ] The newtype keyword
+  - [ ] Monoids
+- [ ] A Fistful of Monads
+  - [ ] Getting our feet wet with Maybe
+  - [ ] The Monad type class
+  - [ ] Walk the line
+  - [ ] do notation
+  - [ ] The list monad
+  - [ ] Monad laws
+- [ ] For a Few Monads More
+  - [ ] Writer? I hardly know her!
+  - [ ] Reader? Ugh, not this joke again.
+  - [ ] Tasteful stateful computations
+  - [ ] Error error on the wall
+  - [ ] Some useful monadic functions
+  - [ ] Making monads
+- [ ] Zippers
+  - [ ] Taking a walk
+  - [ ] A trail of breadcrumbs
+  - [ ] Focusing on lists
+  - [ ] A very simple file system
+  - [ ] Watch your step
 
 ### Avvio interactive mode
 
